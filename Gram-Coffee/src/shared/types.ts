@@ -12,7 +12,9 @@ export interface BenefitType {
 }
 
 export interface ClassType {
+  id: number;
   name: string;
   description?: string;
   image: string;
+  price: number;
 }

@@ -6,7 +6,8 @@ import { SelectedPage } from "../../shared/types";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import ActionButton from "../../shared/ActionButton";
 import { useNavigate } from 'react-router-dom';
-
+import { MdShoppingBasket, MdAdd } from "react-icons/md";
+import { useStateValue } from '../../context/StateProvider'
 
 type Props = {
   isTopOfPage: boolean;
@@ -19,6 +20,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
+  const { openCart, cartQuantity } = useStateValue()
 
   return (
     <nav>
@@ -55,7 +57,19 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                     setSelectedPage={setSelectedPage}
                   />
                 </div>
+
+                
                 <div className={`${flexBetween} gap-8`}>
+                <div className={`${flexBetween} gap-6`}>
+                <div className="relative flex items-center justify-center">
+                  <MdShoppingBasket className="text-textColor text-2xl  cursor-pointer" onClick={openCart}/>
+                  <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center">
+                    <p className="text-xs text-white font-semibold ">
+                      {cartQuantity}
+                    </p>
+                  </div>
+                  </div>
+                </div>
                   <ActionButton setSelectedPage={setSelectedPage}>
                     Register Now!
                   </ActionButton>
