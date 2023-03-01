@@ -12,42 +12,56 @@ import Class from "./Class";
 
 const classes: Array<ClassType> = [
   {
+    id: 1,
     name: "Americano",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     image: image1,
+    price: 115.00,
   },
   {
+    id: 2,
     name: "Mocha",
     image: image2,
+    price: 115.00,
   },
   {
+    id: 3,
     name: "Seasalt",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     image: image3,
+    price: 115.00,
   },
   {
+    id: 4,
     name: "Gram Signature",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     image: image4,
+    price: 105.00,
   },
   {
+    id: 5,
     name: "Caramel Machiatto",
     image: image5,
+    price: 125.00,
   },
   {
+    id: 6,
     name: "Spanish Latte",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     image: image6,
+    price: 115.00,
   },
   {
+    id: 7,
     name: "Mocha Frappe",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     image: image7,
+    price: 120.00,
   },
 ];
 
@@ -86,10 +100,12 @@ const OurClasses = ({ setSelectedPage }: Props) => {
           <ul className="w-[2800px] whitespace-nowrap">
             {classes.map((item: ClassType, index) => (
               <Class
+                id={item.id}
                 key={`${item.name}-${index}`}
                 name={item.name}
                 description={item.description}
                 image={item.image}
+                price={item.price}
               />
             ))}
           </ul>
@@ -98,5 +114,5 @@ const OurClasses = ({ setSelectedPage }: Props) => {
     </section>
   );
 };
-
+ 
 export default OurClasses;
