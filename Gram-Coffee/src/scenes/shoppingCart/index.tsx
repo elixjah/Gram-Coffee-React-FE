@@ -4,6 +4,8 @@ import { RiRefreshFill } from "react-icons/ri";
 import EmptyCart from "../../assets/emptyCart.svg";
 import { Offcanvas, Stack } from "react-bootstrap"
 import { useStateValue } from '../../context/StateProvider'
+import { CartItem } from "./CartItem";
+import productItem from "../../data/items.json"
 
 type ShoppingCartProps = {
     isOpen: boolean
@@ -19,20 +21,20 @@ const ShoppingCart =  ({ isOpen }: ShoppingCartProps) => {
       <Offcanvas.Title>Cart</Offcanvas.Title>
     </Offcanvas.Header>
     <Offcanvas.Body>
-      {/* <Stack gap={3}>
+      <Stack gap={3}>
         {cartItems.map(item => (
           <CartItem key={item.id} {...item} />
         ))}
         <div className="ms-auto fw-bold fs-5">
           Total{" "}
-          {formatCurrency(
+          {
             cartItems.reduce((total, cartItem) => {
-              const item = storeItems.find(i => i.id === cartItem.id)
+              const item = productItem.find(i => i.id === cartItem.id)
               return total + (item?.price || 0) * cartItem.quantity
             }, 0)
-          )}
+          }
         </div>
-      </Stack> */}
+      </Stack>
     </Offcanvas.Body>
   </Offcanvas>
   )
