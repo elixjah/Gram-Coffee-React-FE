@@ -15,6 +15,7 @@ const ShoppingCart =  ({ isOpen }: ShoppingCartProps) => {
 
     const { closeCart, cartItems } = useStateValue()
     console.log(isOpen)
+    
   return (
     <Offcanvas show={isOpen} onHide={closeCart} placement="end">
     <Offcanvas.Header closeButton>
