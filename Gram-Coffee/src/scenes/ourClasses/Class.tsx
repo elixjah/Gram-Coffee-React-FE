@@ -31,7 +31,8 @@ const Class = ({ id, name, description, image, price }: Props) => {
           + Add to Cart
         </button>)
         :(<div><button className="bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-4 rounded" onClick={()=>increaseCartQuantity(id)}>+ Plus</button>{quantity} orders
-        <button className="bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-4 rounded" onClick={()=>decreaseCartQuantity(id)}>- Minus</button></div>)}
+        <button className="bg-brown-500 hover:bg-brown-700 text-white font-bold py-2 px-4 rounded" onClick={()=>decreaseCartQuantity(id)}>- Minus</button ><br />
+        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={()=>removeFromCart(id)}>Remove Orders</button></div>)}
 
       </div>
       <img alt={`${image}`} src={image} />
