@@ -13,7 +13,7 @@ type ShoppingCartProps = {
 
 const ShoppingCart =  ({ isOpen }: ShoppingCartProps) => {
 
-    const { closeCart, cartItems, removeFromCart } = useStateValue()
+    const { closeCart, cartItems, clearCart } = useStateValue()
     console.log(isOpen)
     const user:any = ""
 
@@ -32,7 +32,7 @@ const ShoppingCart =  ({ isOpen }: ShoppingCartProps) => {
         <motion.p
           whileTap={{ scale: 0.75 }}
           className="flex items-center gap-2 p-1 px-2 my-2 bg-gray-100 rounded-md hover:shadow-md  cursor-pointer text-textColor text-base"
-          // onClick={removeFromCart(id)}
+          onClick={clearCart}
         >
           Clear <RiRefreshFill />
         </motion.p>
@@ -52,11 +52,11 @@ const ShoppingCart =  ({ isOpen }: ShoppingCartProps) => {
 
             <div className="w-full flex items-center justify-between">
               <p className="text-black-200 text-xl font-semibold">Total</p>
-              <p className="text-black-200 text-xl font-semibold">
+              <p className="text-black-200 text-xl font-semibold"> Php &nbsp;
               {
                 cartItems.reduce((total, cartItem) => {
                   const item = productItem.find(i => i.id === cartItem.id)
-                  return total + (item?.price || 0) * cartItem.quantity
+                  return total  + (item?.price || 0) * cartItem.quantity
                 }, 0)
               }
             </p>
