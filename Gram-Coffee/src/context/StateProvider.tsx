@@ -1,10 +1,7 @@
 import { StaticHandlerContext } from "@remix-run/router";
 import { createContext, ReactNode, useContext, useState } from "react"
-import { fetchCart, fetchUser } from "../utils/fetchLocalStorageData";
+import { useLocalStorage } from "../utils/fetchLocalStorageData";
 import ShoppingCart from "../scenes/shoppingCart"
-
-const userInfo = fetchUser();
-const cartInfo = fetchCart();
 
 type ShoppingCartProviderProps = {
   children: ReactNode
@@ -18,6 +15,7 @@ type CartItem = {
 type StateContext = {
   openCart: () => void
   closeCart: () => void
+  clearCart: () => void
   getItemQuantity: (id: number) => number
   increaseCartQuantity: (id: number) => void
   decreaseCartQuantity: (id: number) => void
@@ -35,24 +33,22 @@ export const StateContext = createContext({} as StateContext);
 //   </StateContext.Provider>
 // );
 
-
-
 export function useStateValue() {
   return useContext(StateContext)
 }
 
 export function StateProvider({ children }: ShoppingCartProviderProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const [cartItems, setCartItems] = useLocalStorage<CartItem[]>("shopping-cart",
+  [])
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
     0
   )
-
   const openCart = () => setIsOpen(true)
   const closeCart = () => setIsOpen(false)
-console.log(isOpen)
+
   function getItemQuantity(id: number) {
     return cartItems.find(item => item.id === id)?.quantity || 0
   }
@@ -92,11 +88,21 @@ console.log(isOpen)
       return currItems.filter(item => item.id !== id)
     })
   }
+
+  function clearCart() {
+    setCartItems(currItems => {
+      localStorage.setItem("shopping-cart", JSON.stringify([]));
+      return currItems = []
+    })
+  }
+
+  
   return <StateContext.Provider value={{
     getItemQuantity,
     increaseCartQuantity,
     decreaseCartQuantity,
     removeFromCart,
+    clearCart,
     openCart,
     closeCart,
     cartItems,
